@@ -7,19 +7,22 @@ import Main from './components/Main'
 import AuthContext from './context/Auth/authContext'
 import LoginDialog from './components/Login'
 import SnackbarContext from './context/Snackbar/snackbarContext'
+import ContentContext from './context/Content/contentContext'
 
 function App() {
   return (
     <SnackbarContext>
       <AuthContext>
         <UiContext>
-          <>
-            <CssBaseline />
-            <Main />
-            <AppBar />
-            <Drawer />
-            <LoginDialog />
-          </>
+          <ContentContext>
+            <>
+              <CssBaseline />
+              <Main />
+              <AppBar />
+              <Drawer />
+              <LoginDialog />
+            </>
+          </ContentContext>
         </UiContext>
       </AuthContext>
     </SnackbarContext>

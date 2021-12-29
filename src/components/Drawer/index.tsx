@@ -15,6 +15,7 @@ import LoginIcon from '@mui/icons-material/Login'
 import SyncIcon from '@mui/icons-material/Sync'
 import NotesIcon from '@mui/icons-material/Notes'
 import DataIcon from '@mui/icons-material/FindInPage'
+import { useContextContent } from '../../context/Content/contentContext'
 
 enum MenuItem {
   NOTES = 'Notes',
@@ -25,6 +26,7 @@ enum MenuItem {
 
 const Drawer = () => {
   const { drawerOpen, setDrawerOpen, setCurrentPage, setLoginOpen } = useContextUi()
+  const { fetchData } = useContextContent()
   const { toggleDrawer } = useDrawer(setDrawerOpen)
   const { isOnline, isLoggedIn } = useContextAuth()
 
@@ -40,7 +42,7 @@ const Drawer = () => {
         setLoginOpen(true)
         break
       case MenuItem.SYNC:
-        // TODO
+        fetchData()
         break
     }
     setTimeout(() => {

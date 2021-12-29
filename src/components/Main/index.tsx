@@ -8,7 +8,7 @@ const Main = () => {
   const { currentPage } = useContextUi()
 
   return (
-    <Box bgcolor={'#E7EBF0FF'}>
+    <Box bgcolor={'#E7EBF0FF'} p={2} paddingTop={'72px'}>
       {currentPage === Page.NOTES && <Notes />}
       {currentPage === Page.DATA && <PersonalData />}
     </Box>
