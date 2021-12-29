@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/notes-pwa.iml" filepath="$PROJECT_DIR$/.idea/notes-pwa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pk-start-pwa.iml" filepath="$PROJECT_DIR$/.idea/pk-start-pwa.iml" />
     </modules>
   </component>
 </project>

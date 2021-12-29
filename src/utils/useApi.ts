@@ -1,13 +1,21 @@
+import { StorageKey, useStorage } from './useStorage'
+import { User } from '../types/User'
+
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 export const useApi = () => {
-  const baseUrl = process.env.PK_API_URL
+  const baseUrl = process.env.REACT_APP_PK_API_URL
+  const { getStored } = useStorage()
 
   function getHeaders(isAuth: boolean): Headers {
+    const { token } = getStored<User>(StorageKey.USER) ?? { token: null }
+    if (isAuth && !token) {
+      throw new Error('This is an authorized request but no token found!')
+    }
     const headers = new Headers()
     headers.append('Content-Type', 'application/json')
     if (isAuth) {
-      headers.append('Authorization', `Bearer //TODO`)
+      headers.append('Authorization', `Bearer ${token}`)
     }
     return headers
   }
@@ -23,18 +31,22 @@ export const useApi = () => {
       headers: getHeaders(isAuth),
       body: method === 'GET' ? undefined : JSON.stringify(requestBody),
     })
-    return (await res.json()) as T
+    try {
+      return (await res.json()) as T
+    } catch (e) {
+      return undefined as unknown as T
+    }
   }
 
-  async function get<T>(path: string, isAuth: boolean): Promise<T> {
+  async function get<T>(path: string, isAuth: boolean = true): Promise<T> {
     return request<null, T>(path, null, 'GET', isAuth)
   }
 
-  async function post<R, T>(path: string, requestBody: R, isAuth: boolean): Promise<T> {
+  async function post<R, T>(path: string, requestBody: R, isAuth: boolean = true): Promise<T> {
     return request<R, T>(path, requestBody, 'POST', isAuth)
   }
 
-  async function put<R, T>(path: string, requestBody: R, isAuth: boolean): Promise<T> {
+  async function put<R, T>(path: string, requestBody: R, isAuth: boolean = true): Promise<T> {
     return request<R, T>(path, requestBody, 'PUT', isAuth)
   }
 

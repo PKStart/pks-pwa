@@ -6,6 +6,7 @@ import React, {
   useContext,
   useState,
 } from 'react'
+import { useLoading } from './useLoading'
 
 export enum Page {
   NOTES = 'NOTES',
@@ -19,6 +20,9 @@ interface UiContextType {
   setLoginOpen: Dispatch<SetStateAction<boolean>>
   currentPage: Page
   setCurrentPage: Dispatch<SetStateAction<Page>>
+  loading: boolean
+  addLoading: () => void
+  removeLoading: () => void
 }
 
 const Context = createContext({} as UiContextType)
@@ -27,9 +31,22 @@ const UiContext = ({ children }: { children: ReactNode }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [loginOpen, setLoginOpen] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState<Page>(Page.NOTES)
+
+  const { loading, addLoading, removeLoading } = useLoading()
+
   return (
     <Context.Provider
-      value={{ drawerOpen, setDrawerOpen, loginOpen, setLoginOpen, currentPage, setCurrentPage }}
+      value={{
+        drawerOpen,
+        setDrawerOpen,
+        loginOpen,
+        setLoginOpen,
+        currentPage,
+        setCurrentPage,
+        loading,
+        addLoading,
+        removeLoading,
+      }}
     >
       {children}
     </Context.Provider>

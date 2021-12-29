@@ -1,5 +1,12 @@
 import React from 'react'
-import { IconButton, Slide, Toolbar, AppBar as MuiAppBar, useScrollTrigger } from '@mui/material'
+import {
+  IconButton,
+  Slide,
+  Toolbar,
+  AppBar as MuiAppBar,
+  useScrollTrigger,
+  CircularProgress,
+} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useContextUi } from '../../context/UI/uiContext'
 import { useDrawer } from '../Drawer/useDrawer'
@@ -22,7 +29,7 @@ const Spacer = styled.div`
 `
 
 const AppBar = () => {
-  const { setDrawerOpen } = useContextUi()
+  const { setDrawerOpen, loading } = useContextUi()
   const { toggleDrawer } = useDrawer(setDrawerOpen)
   const { isOnline } = useContextAuth()
 
@@ -41,6 +48,7 @@ const AppBar = () => {
             <MenuIcon />
           </IconButton>
           <Spacer />
+          {loading && <CircularProgress color={'inherit'} size={24} />}
           {!isOnline ? <WifiOffIcon /> : null}
         </Toolbar>
       </MuiAppBar>

@@ -5,6 +5,7 @@ import Drawer from './components/Drawer'
 import UiContext from './context/UI/uiContext'
 import Main from './components/Main'
 import AuthContext from './context/Auth/authContext'
+import LoginDialog from './components/Login'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Main />
           <AppBar />
           <Drawer />
+          <LoginDialog />
         </>
       </UiContext>
     </AuthContext>
