@@ -3,6 +3,7 @@ import { LoginResponse, TokenRefreshRequest, TokenResponse } from '../../pk-star
 import { StorageKey, useStorage } from '../../utils/useStorage'
 import { User } from '../../types/User'
 import { useApi } from '../../utils/useApi'
+import { useContextSnackbar } from '../Snackbar/snackbarContext'
 
 interface AuthContextType {
   isLoggedIn: boolean
@@ -15,6 +16,7 @@ const Context = createContext({} as AuthContextType)
 const AuthContext = ({ children }: { children: ReactNode }) => {
   const { store, getStored, removeStored } = useStorage()
   const { post } = useApi()
+  const { showError } = useContextSnackbar()
   const [isOnline, setIsOnline] = useState<boolean>(window.navigator.onLine)
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
@@ -44,6 +46,7 @@ const AuthContext = ({ children }: { children: ReactNode }) => {
             })
           })
           .catch(error => {
+            showError('Could not refresh token, logging out')
             console.warn('Could not refresh token, logging out', { error })
             removeStored(StorageKey.USER)
             setIsLoggedIn(false)

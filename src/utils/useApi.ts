@@ -31,6 +31,11 @@ export const useApi = () => {
       headers: getHeaders(isAuth),
       body: method === 'GET' ? undefined : JSON.stringify(requestBody),
     })
+    if (!res.ok) {
+      const text = await res.text()
+      const error = JSON.parse(text)
+      throw new Error(error.message)
+    }
     try {
       return (await res.json()) as T
     } catch (e) {

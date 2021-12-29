@@ -6,20 +6,23 @@ import UiContext from './context/UI/uiContext'
 import Main from './components/Main'
 import AuthContext from './context/Auth/authContext'
 import LoginDialog from './components/Login'
+import SnackbarContext from './context/Snackbar/snackbarContext'
 
 function App() {
   return (
-    <AuthContext>
-      <UiContext>
-        <>
-          <CssBaseline />
-          <Main />
-          <AppBar />
-          <Drawer />
-          <LoginDialog />
-        </>
-      </UiContext>
-    </AuthContext>
+    <SnackbarContext>
+      <AuthContext>
+        <UiContext>
+          <>
+            <CssBaseline />
+            <Main />
+            <AppBar />
+            <Drawer />
+            <LoginDialog />
+          </>
+        </UiContext>
+      </AuthContext>
+    </SnackbarContext>
   )
 }
 

@@ -20,10 +20,12 @@ import { useContextUi } from '../../context/UI/uiContext'
 import { useApi } from '../../utils/useApi'
 import { StorageKey, useStorage } from '../../utils/useStorage'
 import { useContextAuth } from '../../context/Auth/authContext'
+import { useContextSnackbar } from '../../context/Snackbar/snackbarContext'
 
 const LoginSteps = () => {
   const { loading, addLoading, removeLoading, setLoginOpen } = useContextUi()
   const { handleLogin } = useContextAuth()
+  const { showError, showSuccess } = useContextSnackbar()
   const { post } = useApi()
   const { storeString, getStoredString } = useStorage()
   const [step, setStep] = useState<number>(1)
@@ -37,6 +39,7 @@ const LoginSteps = () => {
       await post<LoginCodeRequest, void>('/users/login-code', { email }, false)
       setStep(2)
     } catch (e) {
+      showError('Could not get login code: ' + (e as { message: string }).message)
       console.log(e)
     } finally {
       removeLoading()
@@ -51,10 +54,11 @@ const LoginSteps = () => {
         { email, loginCode },
         false
       )
-      console.log(res)
       handleLogin(res)
+      showSuccess('Successfully logged in!')
       setLoginOpen(false)
     } catch (e) {
+      showError('Could not log in: ' + (e as { message: string }).message)
       console.log(e)
     } finally {
       removeLoading()
