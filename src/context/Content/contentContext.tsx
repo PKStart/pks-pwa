@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { Note, PersonalData } from '../../pk-start-common'
+import { CreateNoteRequest, Note, PersonalData } from '../../pk-start-common'
 import { useApi } from '../../utils/useApi'
 import { useContextUi } from '../UI/uiContext'
 import { useContextAuth } from '../Auth/authContext'
@@ -17,12 +17,13 @@ interface ContentContextType {
   notes: Note[]
   personalData: PersonalData[]
   fetchData: () => void
+  addNote: (note: Partial<Note>) => Promise<{ ok: boolean }>
 }
 
 const Context = createContext({} as ContentContextType)
 
 const ContentContext = ({ children }: { children: ReactNode }) => {
-  const { get } = useApi()
+  const { get, post } = useApi()
   const { addLoading, removeLoading } = useContextUi()
   const { isLoggedIn, isOnline } = useContextAuth()
   const { showError, showSuccess } = useContextSnackbar()
@@ -46,6 +47,27 @@ const ContentContext = ({ children }: { children: ReactNode }) => {
     } catch (e) {
       showError('Could not fetch data: ' + (e as { message: string }).message)
       console.log(e)
+    } finally {
+      removeLoading()
+    }
+  }
+
+  const addNote = async (note: Partial<Note>): Promise<{ ok: boolean }> => {
+    try {
+      addLoading()
+      await post<CreateNoteRequest, void>('/notes', {
+        text: note.text || undefined,
+        links: note.links?.length ? note.links : undefined,
+        pinned: false,
+        archived: false,
+      })
+      showSuccess('Successfully added new note!')
+      await fetchData()
+      return { ok: true }
+    } catch (e) {
+      showError('Could not add note: ' + (e as { message: string }).message)
+      console.log(e)
+      return { ok: false }
     } finally {
       removeLoading()
     }
@@ -78,6 +100,7 @@ const ContentContext = ({ children }: { children: ReactNode }) => {
         notes,
         personalData,
         fetchData,
+        addNote,
       }}
     >
       {children}

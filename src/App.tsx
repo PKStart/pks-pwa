@@ -8,6 +8,7 @@ import AuthContext from './context/Auth/authContext'
 import LoginDialog from './components/Login'
 import SnackbarContext from './context/Snackbar/snackbarContext'
 import ContentContext from './context/Content/contentContext'
+import NoteDialog from './components/Notes/NoteDialog'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <AppBar />
               <Drawer />
               <LoginDialog />
+              <NoteDialog />
             </>
           </ContentContext>
         </UiContext>

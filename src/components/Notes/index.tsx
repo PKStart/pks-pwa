@@ -1,10 +1,23 @@
 import React from 'react'
-import { Box, Card, CardContent, Link, Typography } from '@mui/material'
+import styled from 'styled-components'
+import { Box, Card, CardContent, Fab, Link, Typography } from '@mui/material'
 import { useContextContent } from '../../context/Content/contentContext'
 import LinkIcon from '@mui/icons-material/Link'
+import AddIcon from '@mui/icons-material/Add'
+import { useContextUi } from '../../context/UI/uiContext'
+import { useContextAuth } from '../../context/Auth/authContext'
+
+const FabBox = styled(Box)`
+  text-align: right;
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+`
 
 const Notes = () => {
+  const { isOnline, isLoggedIn } = useContextAuth()
   const { notes } = useContextContent()
+  const { setNoteDialogOpen } = useContextUi()
 
   return (
     <>
@@ -38,6 +51,13 @@ const Notes = () => {
           {/*</CardActions>*/}
         </Card>
       ))}
+      {isOnline && isLoggedIn ? (
+        <FabBox>
+          <Fab color="primary" aria-label="add" onClick={() => setNoteDialogOpen(true)}>
+            <AddIcon />
+          </Fab>
+        </FabBox>
+      ) : null}
     </>
   )
 }

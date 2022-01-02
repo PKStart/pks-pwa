@@ -18,6 +18,8 @@ interface UiContextType {
   setDrawerOpen: Dispatch<SetStateAction<boolean>>
   loginOpen: boolean
   setLoginOpen: Dispatch<SetStateAction<boolean>>
+  noteDialogOpen: boolean
+  setNoteDialogOpen: Dispatch<SetStateAction<boolean>>
   currentPage: Page
   setCurrentPage: Dispatch<SetStateAction<Page>>
   loading: boolean
@@ -30,6 +32,7 @@ const Context = createContext({} as UiContextType)
 const UiContext = ({ children }: { children: ReactNode }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [loginOpen, setLoginOpen] = useState<boolean>(false)
+  const [noteDialogOpen, setNoteDialogOpen] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState<Page>(Page.NOTES)
 
   const { loading, addLoading, removeLoading } = useLoading()
@@ -41,6 +44,8 @@ const UiContext = ({ children }: { children: ReactNode }) => {
         setDrawerOpen,
         loginOpen,
         setLoginOpen,
+        noteDialogOpen,
+        setNoteDialogOpen,
         currentPage,
         setCurrentPage,
         loading,
