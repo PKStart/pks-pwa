@@ -10,12 +10,7 @@ import {
   OutlinedInput,
 } from '@mui/material'
 import ArrowIcon from '@mui/icons-material/ArrowForward'
-import {
-  LoginCodeRegex,
-  LoginCodeRequest,
-  LoginRequest,
-  LoginResponse,
-} from '../../pk-start-common'
+import { LoginCodeRegex, LoginCodeRequest, LoginRequest, LoginResponse } from 'pks-common'
 import { useContextUi } from '../../context/UI/uiContext'
 import { useApi } from '../../utils/useApi'
 import { StorageKey, useStorage } from '../../utils/useStorage'

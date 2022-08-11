@@ -14,7 +14,7 @@ import { useContextUi } from '../../context/UI/uiContext'
 import { useContextContent } from '../../context/Content/contentContext'
 import { FullscreenDialogTransition } from '../common/FullscreenDialogTransition'
 import NoteForm from './NoteForm'
-import { Note } from '../../pk-start-common'
+import { Note } from 'pks-common'
 
 const NoteDialog = () => {
   const { noteDialogOpen, setNoteDialogOpen, loading } = useContextUi()

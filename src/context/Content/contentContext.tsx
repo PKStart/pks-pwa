@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { CreateNoteRequest, Note, PersonalData } from '../../pk-start-common'
+import { CreateNoteRequest, Note, PersonalData } from 'pks-common'
 import { useApi } from '../../utils/useApi'
 import { useContextUi } from '../UI/uiContext'
 import { useContextAuth } from '../Auth/authContext'

@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { Box, Button, IconButton, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Close'
-import { Note } from '../../pk-start-common'
+import { Note } from 'pks-common'
 
 interface Props {
   note: Pick<Note, 'text' | 'links'>

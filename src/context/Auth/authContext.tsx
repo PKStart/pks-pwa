@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { LoginResponse, TokenRefreshRequest, TokenResponse } from '../../pk-start-common'
+import { LoginResponse, TokenRefreshRequest, TokenResponse } from 'pks-common'
 import { StorageKey, useStorage } from '../../utils/useStorage'
 import { User } from '../../types/User'
 import { useApi } from '../../utils/useApi'
