@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "update:common": "npm install git+https://github.com/PKStart/pks-common.git",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint . --ext .ts,.tsx",
     "format:check": "prettier --check  \"src/**/*.{ts,tsx,scss,html,json}\"",
-    "fetch-common": "./scripts/fetch-common.sh",
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
