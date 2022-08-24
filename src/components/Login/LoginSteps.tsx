@@ -75,10 +75,14 @@ const LoginSteps = () => {
             <OutlinedInput
               id="email-input"
               label="Email"
-              type={'email'}
+              type="email"
+              inputMode="email"
               value={email}
               onChange={e => {
                 setEmail(e.target.value)
+              }}
+              onKeyPress={event => {
+                event.key === 'Enter' && getLoginCode()
               }}
               endAdornment={
                 <InputAdornment position="end">
@@ -111,10 +115,14 @@ const LoginSteps = () => {
             <OutlinedInput
               id="login-code-input"
               label="Login code"
-              type={'text'}
+              type="text"
+              inputMode="numeric"
               value={loginCode}
               onChange={e => {
                 setLoginCode(e.target.value)
+              }}
+              onKeyPress={event => {
+                event.key === 'Enter' && login()
               }}
               endAdornment={
                 <InputAdornment position="end">
